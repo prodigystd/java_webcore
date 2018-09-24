@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="WebCore:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="WebCore-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="WebCore:war exploded" />
+    </root>
+  </artifact>
+</component>
