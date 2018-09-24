@@ -4,21 +4,29 @@ import java.sql.*;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.WebCore.model.*;
+import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
+
+
+@Service
 public class DB_interact {
+
     @Autowired
     DataSource dataSource;
 
     private ResultSet Select(String sql) {
         ResultSet rs = null;
-        try {
+        try
+        {
             Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.getErrorCode();
         }
      return rs;

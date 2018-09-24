@@ -1,10 +1,10 @@
 package com.WebCore.controller;
 
 import com.WebCore.DB_interact;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.WebCore.model.User;
@@ -12,7 +12,8 @@ import com.WebCore.model.User;
 @Controller
 public class UserController {
 
-    private DB_interact db_interact = new DB_interact();
+    @Autowired
+    private DB_interact db_interact;
 
     @RequestMapping("/main")
     public String index() {
