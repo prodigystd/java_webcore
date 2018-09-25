@@ -7,6 +7,7 @@ public class User {
     private String password;
     private String passwordConfirm;
     private Set<Role> roles;
+    private java.sql.Date Registered_Date;
 
     public Long getId() {
         return id;
@@ -46,6 +47,16 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public void setRegistered_Date(java.sql.Date date)
+    {
+        this.Registered_Date = date;
+    }
+
+    public java.sql.Date getRegistered_Date()
+    {
+        return this.Registered_Date;
     }
 
 }

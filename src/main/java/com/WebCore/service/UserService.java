@@ -1,4 +1,4 @@
-package com.WebCore;
+package com.WebCore.service;
 
 import com.WebCore.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,10 @@ public class UserService {
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         HashSet <Role> roles = new HashSet<Role>();
-        roles.add(db_interact.get_role(1));
+        Role role = new Role();
+        role.setId(1);
+        roles.add(role);
+        //roles.add(db_interact.get_role(1));
         user.setRoles(roles);
         user.setRegistered_Date(
                 new java.sql.Date(new java.util.Date().getTime()));
