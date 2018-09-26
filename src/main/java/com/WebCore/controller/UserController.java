@@ -20,11 +20,6 @@ public class UserController {
     @Autowired
     private DB_interact db_interact;
 
-    @RequestMapping("/main")
-    public String index() {
-        return "main";
-    }
-
     @RequestMapping(value = "/login", method = RequestMethod.GET )
     public String login(Model model, String error, String logout) {
         if (error != null)
@@ -64,10 +59,11 @@ public class UserController {
                 userForm.getPasswordConfirm());
         return "redirect:/";
     }
-
+/*
     @GetMapping("/")
     public String sayHello(Model model) {
         model.addAttribute("Users",db_interact.getUsers());
         return "hello";
     }
+    */
 }

@@ -29,6 +29,17 @@ insert into roles values(null,'user');
 insert into roles values(null,'admin');
 insert into User_roles values(1,1);
 
+create table Articles (
+  article_id BIGINT unsigned not null AUTO_INCREMENT,
+  user_id INT unsigned not null,  
+  article_name VARCHAR(200) not null,
+  article_text TEXT not null,
+  constraint article_id_pk  PRIMARY KEY(article_id),
+  constraint user_id_fk_a  FOREIGN KEY(user_id) 
+  REFERENCES Users(id),
+  index(user_id)
+);
+
 
 
 

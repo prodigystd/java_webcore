@@ -5,19 +5,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Static content -->
     <link rel="stylesheet" href="/resources/css/style.css">
-    <script type="text/javascript" src="/resources/js/app.js"></script>
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/common.css" rel="stylesheet">
 
-    <title>Spring Boot</title>
+    <title>Registration</title>
 </head>
 <body>
-<h1>Login</h1>
-<hr>
 
-<div class="form">
+
+
+<div class="form center-block" >
 
     <form:form method="POST" modelAttribute="userForm">
         <h2 class="form-signin-heading">Create your account</h2>
@@ -31,7 +34,8 @@
 
         <spring:bind path="password">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
+                <form:input type="password" path="password" class="form-control"
+                            placeholder="Password"></form:input>
                 <form:errors path="password"></form:errors>
             </div>
         </spring:bind>
@@ -48,6 +52,8 @@
     </form:form>
 
 </div>
-
+<!-- /container -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
