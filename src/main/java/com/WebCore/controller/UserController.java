@@ -1,7 +1,9 @@
 package com.WebCore.controller;
 
 import com.WebCore.service.DB_interact;
+import com.WebCore.service.SecurityService;
 import com.WebCore.service.UserService;
+import com.WebCore.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,20 +43,25 @@ public class UserController {
     }
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+
+    @Autowired
+    private UserValidator userValidator;
+
+    @Autowired
+    private SecurityService securityService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        //userValidator.validate(userForm, bindingResult);
+    public String register(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+        userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "register";
         }
 
         userService.save(userForm);
-
-        //securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
-
+        securityService.autologin(userForm.getUsername(),
+                userForm.getPasswordConfirm());
         return "redirect:/";
     }
 

@@ -58,15 +58,15 @@ public class DB_interact {
                 role.setName(rs.getString("role"));
                 role.setId(rs.getInt("role_id"));
                 roles.add(role);
+                while (rs.next())
+                {
+                    role = new Role();
+                    role.setName(rs.getString("role"));
+                    role.setId(rs.getInt("role_id"));
+                    roles.add(role);
+                }
+                user.setRoles(roles);
             }
-            while (rs.next())
-            {
-                role = new Role();
-                role.setName(rs.getString("role"));
-                role.setId(rs.getInt("role_id"));
-                roles.add(role);
-            }
-            user.setRoles(roles);
         }
         catch (SQLException e)
         {
@@ -147,7 +147,6 @@ public class DB_interact {
                 statement.addBatch();
             }
             statement.executeBatch();
-            connection.commit();
             statement.close();
             connection.close();
         }

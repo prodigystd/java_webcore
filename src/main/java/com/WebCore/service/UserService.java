@@ -15,7 +15,7 @@ public class UserService {
     private DB_interact db_interact;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
