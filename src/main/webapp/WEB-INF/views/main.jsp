@@ -14,14 +14,14 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 
-<nav class="navbar navbar-default" style="background-color: #eee;">
+<nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">WebCore</a>
+            <a class="navbar-brand" href="/">WebCore</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Main</a></li>
-            <li><a href="#">My articles</a></li>
+            <li class="active"><a href="/">Main</a></li>
+            <li><a href="/my_articles">My articles</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>

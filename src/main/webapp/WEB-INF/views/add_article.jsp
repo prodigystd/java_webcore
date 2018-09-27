@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,10 +32,31 @@
     </div>
 </nav>
 
-<div class="form-group">
-    <input type="text" class="form-control" id="usr" placeholder="Article header">
-    <textarea class="form-control" id="arictle_content" placeholder="Article content..."></textarea>
-    <button type="button" class="btn btn-success">Save</button>
+
+<form:form method="POST" modelAttribute="userArticle">
+
+    <spring:bind path="articleHeader">
+    <div class="form-group ${status.error ? 'has-error' : ''}">
+    <form:input type="text" path="articleHeader" class="form-control" id="usr" placeholder="Article header"
+                autofocus="true"></form:input>
+    <form:errors path="articleHeader"></form:errors>
+    </div>
+    </spring:bind>
+
+    <spring:bind path="articleContent">
+    <div class="form-group ${status.error ? 'has-error' : ''}">
+    <form:textarea class="form-control" path="articleContent" placeholder="Article content..." rows="20"
+                   ></form:textarea>
+    <form:errors path="articleContent"></form:errors>
+        </div>
+    </spring:bind>
+<div class="btn-group">
+    <a href="/my_articles" class="btn btn-default" role="button">Back</a>
+</div>
+<div class="btn-group">
+    <button type="submit" class="btn btn-success">Save</button>
+</div>
+</form:form>
 </div>
 
 <script src="webjars/jquery/1.12.4/jquery.min.js"></script>
