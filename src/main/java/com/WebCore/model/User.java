@@ -2,18 +2,18 @@ package com.WebCore.model;
 import java.util.Set;
 
 public class User {
-    private Long id;
+    private int id;
     private String username;
     private String password;
     private String passwordConfirm;
     private Set<Role> roles;
     private java.sql.Date Registered_Date;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

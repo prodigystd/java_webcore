@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
     <!-- Static content -->
-    <link rel="stylesheet" href="/resources/css/style.css">
+
     <script type="text/javascript" src="/resources/js/app.js"></script>
     <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/common.css" rel="stylesheet">

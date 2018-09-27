@@ -51,7 +51,7 @@ public class DB_interact {
             if(rs.next())
             {
                 user = new User();
-                user.setId(rs.getLong("id"));
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("name"));
                 user.setPassword(rs.getString("password"));
                 role = new Role();
@@ -116,7 +116,7 @@ public class DB_interact {
                     prepareStatement("SELECT LAST_INSERT_ID();").
                     executeQuery();
             if(rs.next()) {
-                user.setId(rs.getLong(1));
+                user.setId(rs.getInt(1));
             }
             else
             {
@@ -164,7 +164,7 @@ public class DB_interact {
         try {
             while(rs.next()) {
                 user = new User();
-                user.setId(rs.getLong("id"));
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("name"));
                 user.setPassword(rs.getString("password"));
                 users.add(user);
@@ -175,4 +175,85 @@ public class DB_interact {
         return users;
     }
 
+    public void save_article(Article article)
+    {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try
+        {
+            connection = dataSource.getConnection();
+            statement = connection.
+                    prepareStatement("INSERT INTO Articles (user_id,article_name,article_text) VALUES(?,?,?)");
+            statement.setInt(1, article.getUser_id());
+            statement.setString(2, article.getArticleHeader());
+            statement.setString(3, article.getArticleContent());
+            statement.executeUpdate();
+            /*
+            ResultSet rs = connection.
+                    prepareStatement("SELECT LAST_INSERT_ID();").
+                    executeQuery();
+            if(rs.next()) {
+                article.setArticleId(rs.getLong(1));
+            }
+            else
+            {
+                connection.rollback();
+            }*/
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public List<Article> getUserArticles(User user)
+    {
+        List<Article> articles = null;
+        Article article = null;
+        ResultSet rs = null;
+        try
+        {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement("Select * from Articles where user_id = ?");
+            statement.setInt(1,user.getId());
+            rs = statement.executeQuery();
+            articles = new ArrayList<>();
+            while (rs.next())
+            {
+                article = new Article();
+                article.setArticleId(rs.getLong("article_id"));
+                article.setArticleHeader(rs.getString("article_name"));
+                article.setArticleContent(rs.getString("article_text"));
+                article.setUser_id(rs.getInt("user_id"));
+                articles.add(article);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return articles;
+    }
+
+    public List<Article> getAllArticles()
+    {
+        ResultSet rs  = Select("Select * from Articles");
+        List<Article> articles = new ArrayList<>();
+        Article article = null;
+        try {
+            while(rs.next()) {
+                article = new Article();
+                article.setArticleId(rs.getLong("article_id"));
+                article.setArticleHeader(rs.getString("article_name"));
+                article.setArticleContent(rs.getString("article_text"));
+                article.setUser_id(rs.getInt("user_id"));
+                articles.add(article);
+            }
+        }catch (SQLException e) {
+            e.getErrorCode();
+        }
+        return articles;
+    }
 }
