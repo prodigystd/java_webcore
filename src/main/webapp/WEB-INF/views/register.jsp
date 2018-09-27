@@ -11,7 +11,7 @@
 
     <!-- Static content -->
     <link rel="stylesheet" href="/resources/css/style.css">
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/common.css" rel="stylesheet">
 
     <title>Registration</title>
@@ -53,7 +53,7 @@
 
 </div>
 <!-- /container -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/1.12.4/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

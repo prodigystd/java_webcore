@@ -55,6 +55,8 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.0.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.0.9.RELEASE" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.47" />
+          <element id="library" level="project" name="Maven: org.webjars:bootstrap:3.3.7" />
+          <element id="library" level="project" name="Maven: org.webjars:jquery:1.12.4" />
         </element>
       </element>
       <element id="directory" name="META-INF">

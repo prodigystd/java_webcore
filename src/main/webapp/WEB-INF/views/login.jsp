@@ -10,38 +10,36 @@
     <!-- Static content -->
     <link rel="stylesheet" href="/resources/css/style.css">
     <script type="text/javascript" src="/resources/js/app.js"></script>
+    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/common.css" rel="stylesheet">
 
-    <title>Spring Boot</title>
+    <title>Login</title>
 </head>
 <body>
-<h1>Login</h1>
-<hr>
 
-<div class="form">
-    <form action="/login" method="post" onsubmit="return validate()">
-        <table>
-            <tr>
-                <td><span>${logout}</span> </td>
-            </tr>
-            <tr>
-                <td><input id="username" name="username" placeholder="Username"></td>
-                </tr>
-            <tr>
-                <td><span>${error}</span> </td>
-            </tr>
-            <tr>
-                <td><input id="password" type="password" name="password" placeholder="Password"></td>
-                </tr><tr>
-                <td><input type="submit" value="Log in"></td>
-            </tr>
-            <tr>
-                <td><h4 class="text-center"><a href="/register">Register</a></h4></td>
-            </tr>
-        </table>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<div class="container">
+
+    <form method="POST" action="/login" onsubmit="return validate()" class="form-signin">
+        <h2 class="form-heading">Log in</h2>
+
+        <div class="form-group ${error != null ? 'has-error' : ''}">
+            <span>${message}</span>
+            <input name="username" type="text" class="form-control" placeholder="Username"
+                   autofocus="true"/>
+            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <span>${error}</span>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+            <h4 class="text-center"><a href="/register">Register</a></h4>
+        </div>
 
     </form>
+
 </div>
+<!-- /container -->
+<script src="webjars/jquery/1.12.4/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>
