@@ -36,6 +36,8 @@
     <div class="article">
         <div class="header"><c:out value="${article.articleHeader}" /></div>
         <div><c:out value="${article.articleContent}" /></div>
+        <a href="/article/${article.articleId}/edit" class="btn btn-success" role="button">
+            <span class="glyphicon glyphicon-edit"></span>Edit</a>
     </div>
 </c:forEach>
 

@@ -25,6 +25,8 @@ public class DB_interact {
             Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
+            statement.close();
+            connection.close();
         }
         catch (SQLException e)
         {
@@ -66,6 +68,8 @@ public class DB_interact {
                     roles.add(role);
                 }
                 user.setRoles(roles);
+                statement.close();
+                connection.close();
             }
         }
         catch (SQLException e)
@@ -91,6 +95,8 @@ public class DB_interact {
                 role.setId(role_id);
                 role.setName(rs.getString("role"));
             }
+            statement.close();
+            connection.close();
         }
         catch (SQLException e)
         {
@@ -188,17 +194,6 @@ public class DB_interact {
             statement.setString(2, article.getArticleHeader());
             statement.setString(3, article.getArticleContent());
             statement.executeUpdate();
-            /*
-            ResultSet rs = connection.
-                    prepareStatement("SELECT LAST_INSERT_ID();").
-                    executeQuery();
-            if(rs.next()) {
-                article.setArticleId(rs.getLong(1));
-            }
-            else
-            {
-                connection.rollback();
-            }*/
             statement.close();
             connection.close();
         }
@@ -229,12 +224,42 @@ public class DB_interact {
                 article.setUser_id(rs.getInt("user_id"));
                 articles.add(article);
             }
+            statement.close();
+            connection.close();
         }
         catch (SQLException e)
         {
             System.out.println(e.getMessage());
         }
         return articles;
+    }
+
+    public Article getArticle(Long article_id)
+    {
+        Article article = null;
+        ResultSet rs = null;
+        try
+        {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement("Select * from Articles where article_id = ?");
+            statement.setLong(1,article_id);
+            rs = statement.executeQuery();
+            if (rs.next())
+            {
+                article = new Article();
+                article.setArticleId(rs.getLong("article_id"));
+                article.setArticleHeader(rs.getString("article_name"));
+                article.setArticleContent(rs.getString("article_text"));
+                article.setUser_id(rs.getInt("user_id"));
+            }
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return article;
     }
 
     public List<Article> getAllArticles()
@@ -251,6 +276,7 @@ public class DB_interact {
                 article.setUser_id(rs.getInt("user_id"));
                 articles.add(article);
             }
+
         }catch (SQLException e) {
             e.getErrorCode();
         }

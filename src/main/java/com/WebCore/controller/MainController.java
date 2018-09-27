@@ -8,12 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.naming.Binding;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainController {
@@ -46,13 +41,21 @@ public class MainController {
                         getArticleContent().
                         replace("\n","<BR>"));*/
         db_interact.save_article(userArticle);
-        return "my_articles";
+        return "redirect:/my_articles";
     }
 
     @GetMapping("/add_article")
     public String add_article(Model model) {
         model.addAttribute("userArticle",new Article());
-        return "add_article";
+        model.addAttribute("Action","Add article");
+        return "article";
+    }
+
+    @RequestMapping("/article/{article_id}/edit")
+    public String add_article(@PathVariable("article_id") long article_id, Model model) {
+        model.addAttribute("userArticle",db_interact.getArticle(article_id));
+        model.addAttribute("Action","Edit article");
+        return "article";
     }
 
 }
