@@ -41,10 +41,10 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String user_name = auth.getName();
         userArticle.setUser_id(db_interact.get_user(user_name).getId());
-        userArticle.setArticleContent(
+       /* userArticle.setArticleContent(
                 userArticle.
                         getArticleContent().
-                        replace("\n","<BR>"));
+                        replace("\n","<BR>"));*/
         db_interact.save_article(userArticle);
         return "my_articles";
     }
