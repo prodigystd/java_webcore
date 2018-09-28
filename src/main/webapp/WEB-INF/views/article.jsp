@@ -8,7 +8,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="${contextPath}/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <title>${Action}</title>
+    <title>${Title}</title>
 </head>
 <body>
 <form id="logoutForm" method="POST" action="/logout">
@@ -33,7 +33,7 @@
     </div>
 </nav>
 
-<form:form method="POST" modelAttribute="userArticle" action="/add_article">
+<form:form method="POST" modelAttribute="userArticle" action="/${action}">
     <spring:bind path="articleHeader">
     <div class="form-group ${status.error ? 'has-error' : ''}">
     <form:input type="text" path="articleHeader" class="form-control" id="usr" placeholder="Article header"

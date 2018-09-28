@@ -36,10 +36,7 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String user_name = auth.getName();
         userArticle.setUser_id(db_interact.get_user(user_name).getId());
-       /* userArticle.setArticleContent(
-                userArticle.
-                        getArticleContent().
-                        replace("\n","<BR>"));*/
+
         db_interact.save_article(userArticle);
         return "redirect:/my_articles";
     }
@@ -47,15 +44,26 @@ public class MainController {
     @GetMapping("/add_article")
     public String add_article(Model model) {
         model.addAttribute("userArticle",new Article());
-        model.addAttribute("Action","Add article");
+        model.addAttribute("Title","Add article");
+        model.addAttribute("action","add_article");
         return "article";
     }
 
-    @RequestMapping("/article/{article_id}/edit")
-    public String add_article(@PathVariable("article_id") long article_id, Model model) {
+    @GetMapping("/article/{article_id}/edit")
+    public String edit_article(@PathVariable("article_id") long article_id, Model model) {
         model.addAttribute("userArticle",db_interact.getArticle(article_id));
-        model.addAttribute("Action","Edit article");
+        model.addAttribute("Title","Edit article");
+        model.addAttribute("action",String.format("article/%d/edit",article_id));
         return "article";
     }
+
+    @RequestMapping(value = "/article/{article_id}/edit",method = RequestMethod.POST)
+    public String edit_article(@PathVariable("article_id") long article_id,@ModelAttribute("userArticle") Article userArticle,
+                               BindingResult bindingResult, Model model) {
+        userArticle.setArticleId(article_id);
+        db_interact.update_article(userArticle);
+        return "redirect:/my_articles";
+    }
+
 
 }

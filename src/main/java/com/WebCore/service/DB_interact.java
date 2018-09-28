@@ -203,6 +203,29 @@ public class DB_interact {
         }
     }
 
+    public void update_article(Article article)
+    {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try
+        {
+            connection = dataSource.getConnection();
+            statement = connection.
+                    prepareStatement("UPDATE Articles set article_name = ? , article_text = ? " +
+                            "where article_id = ?");
+            statement.setString(1, article.getArticleHeader());
+            statement.setString(2, article.getArticleContent());
+            statement.setLong(3, article.getArticleId());
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public List<Article> getUserArticles(User user)
     {
         List<Article> articles = null;
@@ -261,6 +284,8 @@ public class DB_interact {
         }
         return article;
     }
+
+
 
     public List<Article> getAllArticles()
     {
