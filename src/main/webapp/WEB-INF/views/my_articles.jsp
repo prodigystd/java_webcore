@@ -34,10 +34,15 @@
 
 <c:forEach items="${UserArticles}" var="article">
     <div class="article">
-        <div class="header"><c:out value="${article.articleHeader}" /></div>
-        <div><c:out value="${article.articleContent}" /></div>
+        <div class="header"> <a class="link" href="/article/${article.articleId}">
+            <c:out value="${article.articleHeader}" /></a></div>
+        <div><c:out value="${article.getArticleContentShort(1200)}" /></div>
         <a href="/article/${article.articleId}/edit" class="btn btn-success" role="button">
             <span class="glyphicon glyphicon-edit"></span>Edit</a>
+        <a class="link" href="/article/${article.articleId}" class="btn btn-info" role="button">
+            <span class="glyphicon glyphicon-arrow-right"></span>View</a>
+        <a class="link" href="/article/${article.articleId}/delete" class="btn btn-warning" role="button" >
+            <span class="glyphicon glyphicon-arrow-right"></span>Delete</a>
     </div>
 </c:forEach>
 

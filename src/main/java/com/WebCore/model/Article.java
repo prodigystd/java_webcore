@@ -37,6 +37,12 @@ public class Article {
         return articleContent;
     }
 
+    public String getArticleContentShort(int length) {
+        if(articleContent.length()>length)
+            return articleContent.substring(0,length)+"...";
+        return articleContent;
+    }
+
     public void setArticleContent(String articleContent)
     {
         this.articleContent = articleContent;

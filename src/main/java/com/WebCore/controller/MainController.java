@@ -65,5 +65,14 @@ public class MainController {
         return "redirect:/my_articles";
     }
 
+    @GetMapping("/article/{article_id}")
+    public String view_article(@PathVariable("article_id") long article_id, Model model) {
+        Article article = db_interact.getArticle(article_id);
+        model.addAttribute("article",article);
+        model.addAttribute("Title",article.getArticleHeader());
+
+        return "view_article";
+    }
+
 
 }
