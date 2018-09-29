@@ -55,8 +55,17 @@
 <div class="btn-group">
     <button type="submit" class="btn btn-success">Save</button>
 </div>
+    <c:if test = "${action != 'add_article'}">
+    <a href="#"
+       onclick="if(confirm('Do you want to delete this article?'))document.forms['deleteForm${article.articleId}'].submit()"
+       class="btn btn-danger" role="button" >
+        <span class="glyphicon glyphicon-remove"></span>Delete</a>
+    </c:if>
 </form:form>
 </div>
+<form id="deleteForm${article.articleId}" method="POST" action="/article/${article.articleId}/delete">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+</form>
 
 <script src="${contextPath}/webjars/jquery/1.12.4/jquery.min.js"></script>
 <script src="${contextPath}/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>

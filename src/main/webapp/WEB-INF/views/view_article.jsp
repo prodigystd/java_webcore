@@ -37,9 +37,17 @@
 <div class="article">
     <div class="header"> <c:out value="${article.articleHeader}" /> </div>
     <div><c:out value="${article.articleContent}" /></div>
+    <a href="/my_articles" class="btn btn-default" role="button">Back</a>
     <a href="/article/${article.articleId}/edit" class="btn btn-success" role="button">
         <span class="glyphicon glyphicon-edit"></span>Edit</a>
+    <a href="#"
+       onclick="if(confirm('Do you want to delete this article?'))document.forms['deleteForm${article.articleId}'].submit()"
+       class="btn btn-danger" role="button" >
+        <span class="glyphicon glyphicon-remove"></span>Delete</a>
 </div>
+<form id="deleteForm${article.articleId}" method="POST" action="/article/${article.articleId}/delete">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+</form>
 
 <script src="${contextPath}/webjars/jquery/1.12.4/jquery.min.js"></script>
 <script src="${contextPath}/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>

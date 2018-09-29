@@ -70,9 +70,16 @@ public class MainController {
         Article article = db_interact.getArticle(article_id);
         model.addAttribute("article",article);
         model.addAttribute("Title",article.getArticleHeader());
-
         return "view_article";
     }
+
+    @RequestMapping(value = "/article/{article_id}/delete",method = RequestMethod.POST)
+    public String delete_article(@PathVariable("article_id") long article_id, Model model) {
+        db_interact.deleteArticle(article_id);
+        return "redirect:/my_articles";
+    }
+
+
 
 
 }

@@ -37,13 +37,18 @@
         <div class="header"> <a class="link" href="/article/${article.articleId}">
             <c:out value="${article.articleHeader}" /></a></div>
         <div><c:out value="${article.getArticleContentShort(1200)}" /></div>
+        <a href="/article/${article.articleId}" class="btn btn-info" role="button">
+            <span class="glyphicon glyphicon-arrow-right"></span>View</a>
         <a href="/article/${article.articleId}/edit" class="btn btn-success" role="button">
             <span class="glyphicon glyphicon-edit"></span>Edit</a>
-        <a class="link" href="/article/${article.articleId}" class="btn btn-info" role="button">
-            <span class="glyphicon glyphicon-arrow-right"></span>View</a>
-        <a class="link" href="/article/${article.articleId}/delete" class="btn btn-warning" role="button" >
-            <span class="glyphicon glyphicon-arrow-right"></span>Delete</a>
+        <a href="#"
+           onclick="if(confirm('Do you want to delete this article?'))document.forms['deleteForm${article.articleId}'].submit()"
+           class="btn btn-danger" role="button" >
+            <span class="glyphicon glyphicon-remove"></span>Delete</a>
     </div>
+    <form id="deleteForm${article.articleId}" method="POST" action="/article/${article.articleId}/delete">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>
 </c:forEach>
 
 

@@ -226,6 +226,24 @@ public class DB_interact {
         }
     }
 
+    public void deleteArticle(Long article_id)
+    {
+        try
+        {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement("DELETE from Articles where article_id = ?");
+            statement.setLong(1,article_id);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public List<Article> getUserArticles(User user)
     {
         List<Article> articles = null;

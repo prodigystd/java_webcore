@@ -59,11 +59,5 @@ public class UserController {
                 userForm.getPasswordConfirm());
         return "redirect:/";
     }
-/*
-    @GetMapping("/")
-    public String sayHello(Model model) {
-        model.addAttribute("Users",db_interact.getUsers());
-        return "hello";
-    }
-    */
+
 }
