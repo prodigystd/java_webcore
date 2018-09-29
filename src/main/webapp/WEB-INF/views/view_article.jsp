@@ -44,6 +44,7 @@
        onclick="if(confirm('Do you want to delete this article?'))document.forms['deleteForm${article.articleId}'].submit()"
        class="btn btn-danger" role="button" >
         <span class="glyphicon glyphicon-remove"></span>Delete</a>
+    Author: <c:out value="${article.authorName}" />
 </div>
 <form id="deleteForm${article.articleId}" method="POST" action="/article/${article.articleId}/delete">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

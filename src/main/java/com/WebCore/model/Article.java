@@ -5,6 +5,14 @@ public class Article {
     private String articleContent;
     private long articleId;
     private int user_id;
+    private String authorName;
+
+    public String getAuthorName() { return authorName;}
+
+    public void setAuthorName(String authorName)
+    {
+        this.authorName = authorName;
+    }
 
     public int getUser_id() {
         return user_id;

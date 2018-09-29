@@ -269,7 +269,8 @@ public class DB_interact {
         try
         {
             Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("Select * from Articles where article_id = ?");
+            PreparedStatement statement = connection.prepareStatement(
+                    "Select a.*,u.name from Articles a left join users u on a.user_id = u.id where article_id = ?");
             statement.setLong(1,article_id);
             rs = statement.executeQuery();
             if (rs.next())
@@ -279,6 +280,7 @@ public class DB_interact {
                 article.setArticleHeader(rs.getString("article_name"));
                 article.setArticleContent(rs.getString("article_text"));
                 article.setUser_id(rs.getInt("user_id"));
+                article.setAuthorName(rs.getString("name"));
             }
             statement.close();
             connection.close();
@@ -298,7 +300,8 @@ public class DB_interact {
         Article article = null;
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("Select * from Articles");
+            PreparedStatement statement = connection.prepareStatement(
+                    "Select a.*,u.name from Articles a left join users u on a.user_id = u.id");
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 article = new Article();
@@ -306,6 +309,7 @@ public class DB_interact {
                 article.setArticleHeader(rs.getString("article_name"));
                 article.setArticleContent(rs.getString("article_text"));
                 article.setUser_id(rs.getInt("user_id"));
+                article.setAuthorName(rs.getString("name"));
                 articles.add(article);
             }
             statement.close();

@@ -39,6 +39,7 @@
         <div><c:out value="${article.getArticleContentShort(1200)}" /></div>
         <a href="/article/${article.articleId}" class="btn btn-info" role="button">
             <span class="glyphicon glyphicon-arrow-right"></span>View</a>
+        Author: <c:out value="${article.authorName}" />
     </div>
 </c:forEach>
 
