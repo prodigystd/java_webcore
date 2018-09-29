@@ -18,23 +18,6 @@ public class DB_interact {
     @Autowired
     DataSource dataSource;
 
-    private ResultSet Select(String sql) {
-        ResultSet rs = null;
-        try
-        {
-            Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
-            rs = statement.executeQuery();
-            statement.close();
-            connection.close();
-        }
-        catch (SQLException e)
-        {
-            System.out.println(e.getMessage());
-        }
-     return rs;
-    }
-
     public User get_user(String username)
     {
         User user = null;
@@ -164,10 +147,12 @@ public class DB_interact {
 
     public List<User> getUsers()
     {
-        ResultSet rs  = Select("Select * from users");
         User user;
         List<User> users = new ArrayList<>();
         try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement("Select * from users");
+            ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 user = new User();
                 user.setId(rs.getInt("id"));
@@ -175,6 +160,8 @@ public class DB_interact {
                 user.setPassword(rs.getString("password"));
                 users.add(user);
             }
+            statement.close();
+            connection.close();
         }catch (SQLException e) {
             e.getErrorCode();
         }
@@ -307,10 +294,12 @@ public class DB_interact {
 
     public List<Article> getAllArticles()
     {
-        ResultSet rs  = Select("Select * from Articles");
         List<Article> articles = new ArrayList<>();
         Article article = null;
         try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement("Select * from Articles");
+            ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 article = new Article();
                 article.setArticleId(rs.getLong("article_id"));
@@ -319,7 +308,8 @@ public class DB_interact {
                 article.setUser_id(rs.getInt("user_id"));
                 articles.add(article);
             }
-
+            statement.close();
+            connection.close();
         }catch (SQLException e) {
             e.getErrorCode();
         }

@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainController {
-    @RequestMapping("/")
-    public String main() {
+    @GetMapping("/")
+    public String main(Model model) {
+        model.addAttribute("UserArticles",db_interact.getAllArticles());
         return "main";
     }
 
@@ -61,6 +62,13 @@ public class MainController {
     public String edit_article(@PathVariable("article_id") long article_id,@ModelAttribute("userArticle") Article userArticle,
                                BindingResult bindingResult, Model model) {
         userArticle.setArticleId(article_id);
+
+        //check if it is user's article i.e. user have rights to edit it
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String user_name = auth.getName();
+        if(db_interact.get_user(user_name).getId()!=  db_interact.getArticle(article_id).getUser_id())
+            return "redirect:/main";
+
         db_interact.update_article(userArticle);
         return "redirect:/my_articles";
     }
@@ -75,6 +83,13 @@ public class MainController {
 
     @RequestMapping(value = "/article/{article_id}/delete",method = RequestMethod.POST)
     public String delete_article(@PathVariable("article_id") long article_id, Model model) {
+
+        //check if it is user's article i.e. user have rights to delete it
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String user_name = auth.getName();
+        if(db_interact.get_user(user_name).getId()!=  db_interact.getArticle(article_id).getUser_id())
+            return "redirect:/main";
+
         db_interact.deleteArticle(article_id);
         return "redirect:/my_articles";
     }
